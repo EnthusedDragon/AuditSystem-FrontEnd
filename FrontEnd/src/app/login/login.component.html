@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h2>Login</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="form-control" formControlName="email">
+                    <span class="help-block" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
+                        <span *ngIf="loginForm.get('email').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" formControlName="password">
+                    <span class="help-block" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+                        <span *ngIf="loginForm.get('password').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <select class="form-control" formControlName="accountType" id="accountType">
+                        <option value="auditor">Auditor</option>
+                        <option value="staff">Staff</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" (click)="onRegister()" style="margin-right: 15px;">Register</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" (click)="onAddFaculty()" style="margin-right: 15px;">Admin Add Faculty</button>
+                    <button type="button" class="btn btn-secondary" (click)="onAddDepartment()" style="margin-right: 15px;">Admin Add Department</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

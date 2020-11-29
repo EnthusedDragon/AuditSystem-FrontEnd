@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h2>Issue</h2>
+            <form [formGroup]="form" (ngSubmit)="onCreateTicket()">
+                <div class="form-group">
+                    <label for="issueRaisedDate">Issue Raised Date</label>
+                    <p id="issueRaisedDate">{{issue.issueRaisedDate | date:'medium'}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="raisedByUser">Issue Raised By</label>
+                    <p id="raisedByUser">{{issue.raisedByUser.firstName}} {{issue.raisedByUser.surname}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="issueArea">Issue Area</label>
+                    <p id="issueArea">{{issue.issueArea}}</p>
+                </div>                
+                <div class="form-group">
+                    <label for="faculty">Issue Faculty</label>
+                    <p id="faculty">{{issue.department.faculty.facultyName}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="department">Issue Department</label>
+                    <p id="department">{{issue.department.depName}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="isResolved">Resolved Status</label>
+                    <p id="isResolved" *ngIf="issue.isResolved">RESOLVED</p>
+                    <div>
+                        <button id="isResolved" *ngIf="!issue.isResolved" type="button" class="btn btn-danger" (click)="onResolve()" style="margin-right: 15px;">Resolve</button>
+                    </div>                    
+                </div>
+                <div class="form-group" *ngIf='issue.isResolved'>
+                    <label for="isValidated">Is Validated</label>
+                    <p id="isValidated" *ngIf="issue.isValidated">VALIDATED</p>
+                    <div>
+                        <button id="isValidated" *ngIf="!issue.isValidated" type="button" class="btn btn-danger" (click)="onValidate()" style="margin-right: 15px;">Validate</button>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="issue.isResolved">
+                    <label for="issueResolvedDate">Resolution Date</label>
+                    <p id="issueResolvedDate">{{issue.issueResolvedDate}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="issueDescription">Issue Description</label>
+                    <p id="issueDescription">{{issue.issueDescription}}</p>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" (click)="onBack()" style="margin-right: 15px;">Back</button>
+                    <button type="button" class="btn btn-secondary" (click)="generatePdf()" style="margin-right: 15px;">Print Report</button>
+                </div>
+                <hr>
+                <div class="form-group" *ngFor="let ticket of tickets">
+                    <label for="ticket">Ticket by {{ticket.createdByUser.firstName}} {{ticket.createdByUser.surname}} @ {{ticket.ticketDate | date:'medium'}}</label>
+                    <p id="ticket" style="white-space: pre-line">{{ticket.ticketDesc}}</p>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="newTicket">New Ticket</label>
+                    <br>
+                    <textarea id="newTicket" rows="10" style="width: 100%;" formControlName="newTicket"></textarea>
+                    <span class="help-block" *ngIf="!form.get('newTicket').valid && form.get('newTicket').touched">
+                        <span *ngIf="form.get('newTicket').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>  
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="margin-right: 15px;">Comment</button>
+                </div>    
+            </form>
+        </div>
+    </div>
+</div>

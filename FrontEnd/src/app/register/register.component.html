@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h2>Register</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">    
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <select class="form-control" formControlName="accountType" id="accountType" #accountType>
+                        <option value="auditor">Auditor</option>
+                        <option value="staff">Staff</option>
+                    </select>
+                </div>      
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" class="form-control" formControlName="firstName">
+                    <span class="help-block" *ngIf="!registerForm.get('firstName').valid && registerForm.get('firstName').touched">
+                        <span *ngIf="registerForm.get('firstName').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="surname">Surname</label>
+                    <input type="text" id="surname" class="form-control" formControlName="surname">
+                    <span class="help-block" *ngIf="!registerForm.get('surname').valid && registerForm.get('surname').touched">
+                        <span *ngIf="registerForm.get('surname').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="cellPhone">Cell Phone</label>
+                    <input type="text" id="cellPhone" class="form-control" formControlName="cellPhone">
+                    <span class="help-block" *ngIf="!registerForm.get('cellPhone').valid && registerForm.get('cellPhone').touched">
+                        <span *ngIf="registerForm.get('cellPhone').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email">
+                    <span class="help-block" *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">
+                        <span *ngIf="registerForm.get('email').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="confirmEmail">Confirm Email</label>
+                    <input type="email" id="confirmEmail" class="form-control" formControlName="confirmEmail">
+                    <span class="help-block" *ngIf="!registerForm.get('confirmEmail').valid && registerForm.get('confirmEmail').touched">
+                        <span *ngIf="registerForm.get('confirmEmail').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" formControlName="password">
+                    <span class="help-block" *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
+                        <span *ngIf="registerForm.get('password').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
+                    <span class="help-block" *ngIf="!registerForm.get('confirmPassword').valid && registerForm.get('confirmPassword').touched">
+                        <span *ngIf="registerForm.get('confirmPassword').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>        
+                <div class="form-group" *ngIf="accountType.value === 'staff'">
+                    <label for="department">Department</label>
+                    <select class="form-control" formControlName="department" id="department">
+                        <option *ngFor="let department of departments" value="{{department.depid}}">{{department.depName}}</option>
+                    </select>
+                </div>           
+                <hr>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" (click)="onCancel()" style="margin-right: 15px;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

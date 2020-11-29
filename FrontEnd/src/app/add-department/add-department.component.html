@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h2>Create Department</h2>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="username">Super Username</label>
+                    <input type="text" id="username" class="form-control" formControlName="username">
+                    <span class="help-block" *ngIf="!form.get('username').valid && form.get('username').touched">
+                        <span *ngIf="form.get('username').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Super Password</label>
+                    <input type="password" id="password" class="form-control" formControlName="password">
+                    <span class="help-block" *ngIf="!form.get('password').valid && form.get('password').touched">
+                        <span *ngIf="form.get('password').errors['required']"> This field is required!</span>               
+                    </span>
+                </div><div class="form-group">
+                    <label for="depName">Department Name</label>
+                    <input type="depName" id="depName" class="form-control" formControlName="depName">
+                    <span class="help-block" *ngIf="!form.get('depName').valid && form.get('depName').touched">
+                        <span *ngIf="form.get('depName').errors['required']"> This field is required!</span>               
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="faculty">Faculty</label>
+                    <select class="form-control" formControlName="faculty" id="faculty">
+                        <option *ngFor="let faculty of faculties" value="{{faculty.facultyId}}">{{faculty.facultyName}}</option>
+                    </select>
+                </div>    
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" (click)="onCancel()" style="margin-right: 15px;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
