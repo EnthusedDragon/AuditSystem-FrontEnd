@@ -7,9 +7,8 @@
                     <tr>
                         <th scope="col">Issue Area</th>
                         <th scope="col">Department</th>
-                        <th scope="col">Issue Status</th>
-                        <th scope="col">Validated</th>
                         <th scope="col">Resolved</th>
+                        <th scope="col">Validated</th>
                         <th scope="col">Resolved Date</th>
                         <th scope="col">Raised By</th>
                     </tr>
@@ -18,9 +17,8 @@
                     <tr *ngFor="let issue of issues" (click)="onSelect(issue.issueID)">
                         <td>{{issue.issueArea}}</td>
                         <td>{{issue.department.depName}}</td>
-                        <td>{{issue.issueStatus}}</td>
-                        <td>{{issue.isValidated}}</td>
-                        <td>{{issue.isResolved}}</td>
+                        <td>{{issue.isResolved ? 'RESOLVED':'NOT RESOLVED'}}</td>
+                        <td>{{issue.isValidated ? 'VALIDATED':'NOT VALIDATED'}}</td>
                         <td>{{issue.issueResolvedDate}}</td>
                         <td *ngIf="issue.raisedByUser !== null">{{issue.raisedByUser.firstName}} {{issue.raisedByUser.surname}}</td>
                         <td *ngIf="issue.raisedByUser === null">N/A</td>
